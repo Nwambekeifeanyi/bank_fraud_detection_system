@@ -1,0 +1,32 @@
+<div class="topbar">
+    
+  
+  
+      <div class="page_title">
+        <% if (context.page) { %>
+          Account --</i> <%= context.page %> 
+          
+          <% } else { %>
+            Account
+           
+        <% } %>
+         
+      </div>
+
+      
+      <div class="image">
+        <a href="">
+
+          <% if (context.admin) { %>
+           
+            <img src="/images/<%= context.admin.profile %>" alt="" />
+            
+            <% } else { %>
+            <img src="/images/profile3.png" alt="" />
+             
+          <% } %>
+        </a>
+           
+      </div>
+
+    </div>

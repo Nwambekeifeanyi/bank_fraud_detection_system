@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Accounts</title>
+    <!-- ========= links start ========= -->
+      <%- include('../snippets/links.ejs') %>
+      <!-- ========= links end ========= -->
+  </head>
+  <body>
+<% var context %>
+
+   
+<div class="main-container">
+  <!-- ========= topbar starts ========= -->
+ <%- include('../snippets/adminTop.ejs') %>
+  <!-- ========= topbar ends ========= -->
+
+
+
+  <!-- ============== this container holds everything in sidebar(navigation bar) -->
+  <%- include('../snippets/adminNav.ejs') %>
+<!-- navigation bar ends -->
+
+<div class="body-content">
+  <!-- <div class="page_title">Dashboard</div> -->
+
+
+
+
+
+  <div class="table-subject"><i class="fa-solid fa-caret-right"></i>Accounts</div>
+
+
+  <% if (context.users.length > 0) { %>
+   
+   
+    <div class="table-container">
+   
+        <table class="table table-borderless table-sm">
+    <tr>
+      <th>S/N</th>
+      <th>Name</th>
+      <th>Account number</th>
+      <th>Email</th>
+      <th>Contact</th>
+      <th>Reg date</th>
+      <th>Profile</th>
+    </tr>
+  
+
+     <% context.users.forEach((account, index) => { %>
+     
+      <tr>
+        <td><%= index + 1 %>.</td>
+        <td><%= account.full_name %></td>
+        <td><%= account.account_number %></td>
+        <td style="text-transform: lowercase;"><%= account.email %></td>
+        <td><%= account.contact %></td>
+        <td><%= account.regDate %></td>
+        <td><a href="/admin/account/<%= account._id %>"><button>View</button></a></td>
+      </tr>
+    <% }) %>
+  
+  
+  
+   
+    
+  </table>
+   </div>
+  <% } %>
+  
+<% if (context.users.length == 0) { %>
+  <div class="no-output">
+            No account found
+       </div>
+  <% } %>
+
+
+
+ <div class="add-btn">
+             <a href="add_account">
+                   <button><i class="fa-solid fa-plus"></i></button>
+             </a>
+        </div>
+</div>
+
+
+
+</div>
+<script src="/js/actions.js"></script>
+  </body>
+</html>

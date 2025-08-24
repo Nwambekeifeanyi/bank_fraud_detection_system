@@ -1,0 +1,114 @@
+<div class="navigation user_navigation" id="navBar" >
+
+  <% if (context.this_user) { %>
+    <div class="username">
+     <%= context.this_user.full_name %>
+    </div>
+
+    <% } else { %>
+
+       <div class="username">
+     User Account
+    </div>
+   
+  <% } %>
+  <!-- ===================== sidebar menus ============================= -->
+  <ul>
+    <!-- <li>
+      <a href="#">
+        <span class="title">kelly smith</span>
+      </a>
+    </li> -->
+
+    <li>
+      <a href="/account/dashboard">
+        <span class="icon">
+          <i class="fa-solid fa-house"></i>
+        </span>
+        <span class="title">dashboard</span>
+      </a>
+    </li>
+
+     <li>
+      <a href="/account/transactions">
+        <span class="icon">
+          <i class="fa-solid fa-money-check-dollar"></i>
+        </span>
+        <span class="title">transactions</span>
+      </a>
+    </li>
+
+    
+
+
+     <li>
+      <a href="/account/notifications">
+        <span class="icon">
+          <i class="fa-solid fa-bell"></i>
+        </span>
+        <span class="title">Notifications</span>
+      </a>
+    </li>
+
+    <li>
+      <a href="/account/alerts">
+        <span class="icon">
+          <i class="fa-solid fa-triangle-exclamation"></i>
+        </span>
+        <span class="title">alerts</span>
+      </a>
+    </li>
+
+
+   
+   
+    <li>
+      <a href="/account/login_attempts">
+        <span class="icon">
+         <i class="fa-solid fa-arrow-right-to-bracket"></i>
+        </span>
+        <span class="title">login attempts</span>
+      </a>
+    </li>
+
+
+     <li>
+      <a href="/account/profile">
+        <span class="icon">
+          <i class="fa-solid fa-user-tie"></i>
+        </span>
+        <span class="title">profile</span>
+      </a>
+    </li>
+   
+    
+   
+    <!-- <li>
+      <a href="incidents">
+        <span class="icon">
+         <i class="fa-solid fa-circle-exclamation"></i>
+        </span>
+        <span class="title">Fraud Rules</span>
+      </a>
+    </li> -->
+
+    <!-- <li>
+      <a href="tips">
+        <span class="icon">
+              <i class="fa-solid fa-graduation-cap"></i>
+        </span>
+        <span class="title">University Tips</span>
+      </a>
+    </li> -->
+
+   
+    <li>
+      <a href="/auth/user-logout">
+        <span class="icon">
+          <i class="fa-solid fa-right-from-bracket"></i>
+        </span>
+        <span class="title">LOGOUT</span>
+      </a>
+    </li>
+  </ul>
+</div>

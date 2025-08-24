@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dashboard</title>
+    <!-- ========= links start ========= -->
+      <%- include('../snippets/links.ejs') %>
+      <!-- ========= links end ========= -->
+  </head>
+  <body>
+<% var context %>
+
+   
+<div class="main-container">
+  <!-- ========= topbar starts ========= -->
+ <%- include('../snippets/adminTop.ejs') %>
+  <!-- ========= topbar ends ========= -->
+
+
+
+  <!-- ============== this container holds everything in sidebar(navigation bar) -->
+  <%- include('../snippets/adminNav.ejs') %>
+<!-- navigation bar ends -->
+
+<div class="body-content">
+  <!-- <div class="page_title">Dashboard</div> -->
+
+
+ <div class="info">
+
+
+  <div class="menu_container">
+
+    <div class="menu">
+          <div class="icon"> <i class="fa-solid fa-user-tie"></i></div>
+
+          <div class="middle">
+            <div class="text"><i class="fa-solid fa-caret-right"></i> Accounts</div>
+
+            <% if (context.users) { %>
+             <% if (context.users.length<10) { %>
+               <div class="quantity">0<%= context.users.length %></div>
+               
+               <% } else { %>
+                <div class="quantity"><%= context.users.length %></div>
+                
+             <% } %>
+            <% } %>
+          </div>
+      
+         
+    
+          
+         
+          <div class="more">
+            <a href="accounts">
+
+              <button>
+
+                view
+              </button>
+            </a>
+        </div>
+        </div>
+  </div>
+
+
+
+<div class="menu_container">
+
+  <div class="menu">
+   <div class="icon"> <i class="fa-solid fa-user-slash"></i></div>
+
+   <div class="middle">
+    <div class="text"><i class="fa-solid fa-caret-right"></i> blacklisted</div>
+     <% if (context.blacklisted) { %>
+             <% if (context.blacklisted.length<10) { %>
+               <div class="quantity">0<%= context.blacklisted.length %></div>
+               
+               <% } else { %>
+                <div class="quantity"><%= context.blacklisted.length %></div>
+                
+             <% } %>
+            <% } %>
+   </div>
+    
+       
+  
+        
+       
+    <div class="more">
+      <a href="/admin/accounts?q=true">
+
+        <button>
+
+          View
+        </button>
+      </a>
+  </div>
+  </div>
+</div>
+
+<div class="menu_container">
+
+  <div class="menu">
+   <div class="icon"><i class="fa-solid fa-money-check-dollar"></i></div>
+
+   <div class="middle">
+    <div class="text"><i class="fa-solid fa-caret-right"></i> transactions</div>
+     <% if (context.transactions) { %>
+             <% if (context.transactions.length<10) { %>
+               <div class="quantity">0<%= context.transactions.length %></div>
+               
+               <% } else { %>
+                <div class="quantity"><%= context.transactions.length %></div>
+                
+             <% } %>
+            <% } %>
+   </div>
+    
+       
+  
+        
+       
+    <div class="more">
+      <a href="transactions">
+
+        <button>
+
+          View
+        </button>
+      </a>
+  </div>
+  </div>
+</div>
+
+<div class="menu_container">
+
+  <div class="menu">
+   <div class="icon"><i class="fa-solid fa-bell"></i></div>
+
+   <div class="middle">
+    <div class="text"><i class="fa-solid fa-caret-right"></i> Notifications</div>
+     <% if (context.notifications) { %>
+             <% if (context.notifications.length<10) { %>
+               <div class="quantity">0<%= context.notifications.length %></div>
+               
+               <% } else { %>
+                <div class="quantity"><%= context.notifications.length %></div>
+                
+             <% } %>
+            <% } %>
+   </div>
+    
+       
+  
+        
+       
+    <div class="more">
+      <a href="notifications">
+
+        <button>
+
+          View
+        </button>
+      </a>
+  </div>
+  </div>
+</div>
+
+
+<div class="menu_container">
+
+  <div class="menu">
+   <div class="icon"> <i class="fa-solid fa-triangle-exclamation"></i></div>
+
+   <div class="middle">
+    <div class="text"><i class="fa-solid fa-caret-right"></i>Fraud alerts</div>
+     <% if (context.alerts) { %>
+             <% if (context.alerts.length<10) { %>
+               <div class="quantity">0<%= context.alerts.length %></div>
+               
+               <% } else { %>
+                <div class="quantity"><%= context.alerts.length %></div>
+                
+             <% } %>
+            <% } %>
+   </div>
+    
+       
+  
+        
+       
+    <div class="more">
+      <a href="alerts">
+
+        <button>
+
+          View
+        </button>
+      </a>
+  </div>
+  </div>
+</div>
+
+
+<div class="menu_container">
+
+  <div class="menu">
+   <div class="icon"> <i class="fa-solid fa-arrow-right-to-bracket"></i></div>
+
+   <div class="middle">
+    <div class="text"><i class="fa-solid fa-caret-right"></i> login attempts</div>
+     <% if (context.login_attempts) { %>
+             <% if (context.login_attempts.length<10) { %>
+               <div class="quantity">0<%= context.login_attempts.length %></div>
+               
+               <% } else { %>
+                <div class="quantity"><%= context.login_attempts.length %></div>
+                
+             <% } %>
+            <% } %>
+   </div>
+    
+       
+  
+        
+       
+    <div class="more">
+      <a href="login_attempts">
+
+        <button>
+
+          View
+        </button>
+      </a>
+  </div>
+  </div>
+</div>
+
+ </div>
+
+
+ <% if (context.users_limit) { %>
+  
+  <div class="table-subject admin_dashboard_table_subject"><i class="fa-solid fa-caret-right"></i> New Account</div>
+  <div class="table-container table-container-sm">
+ 
+      <table class="table table-borderless table-sm">
+  <tr>
+    <th>S/N</th>
+    <th>Name</th>
+    <th>account number</th>
+    <th>Email</th>
+    <th>Contact</th>
+    <th>Reg date</th>
+    <th>Profile</th>
+  </tr>
+
+  <% context.users_limit.forEach(user => { %>
+   
+    <tr>
+      <td>1.</td>
+      <td><%= user.full_name %></td>
+      <td><%= user.account_number %></td>
+      <td style="text-transform: lowercase;"><%= user.email %></td>
+      <td><%= user.contact %></td>
+      <td><%= user.regDate %></td>
+      <td><a href="/admin/account/<%= user._id %>"><button>View</button></a></td>
+    </tr>
+  <% }) %>
+
+
+</table>
+
+ 
+ 
+          
+  </div>
+ <% } %>
+  
+
+
+
+
+
+</div>
+
+
+
+</div>
+<script src="/js/actions.js"></script>
+  </body>
+</html>

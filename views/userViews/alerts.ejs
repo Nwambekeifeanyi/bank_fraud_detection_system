@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Fraud Alerts</title>
+    <!-- ========= links start ========= -->
+      <%- include('../snippets/links.ejs') %>
+      <link rel="stylesheet" href="/css/components.css">
+      <!-- ========= links end ========= -->
+  </head>
+  <body>
+<% var context %>
+
+   
+<div class="main-container">
+  <!-- ========= topbar starts ========= -->
+ <%- include('../snippets/topbar.ejs') %>
+  <!-- ========= topbar ends ========= -->
+
+
+
+  <!-- =============== footbar starts ================== -->
+  <%- include('../snippets/footbar.ejs') %>
+<!-- =============== footbar ends ================== -->
+
+
+  <!-- ============== this container holds everything in sidebar(navigation bar) -->
+  <%- include('../snippets/navbar.ejs') %>
+<!-- navigation bar ends -->
+
+<div class="body-content">
+
+<% if (context.alerts.length > 0) { %>
+      <div class="notification_container">
+            <div class="table-subject notification_subject"><i class="fa-solid fa-caret-right"></i> Alerts</div>
+      <% context.alerts.forEach(alert => { %>
+        
+                        <% if (alert.message) { %>
+                         
+                          <div class="notification">
+                                <span><%= alert.message %></span>
+                                <p><%= alert.regDate %></p>
+                               
+                          </div>
+                        <% } %>
+                  
+                  <% }) %>
+            </div>
+  <% } %>
+
+
+</div>
+
+
+
+<% if (!context.alerts.length > 0) { %>
+  <div class="no-output">
+            No notification found
+       </div>
+  <% } %>
+
+
+
+</div>
+<script src="/js/actions.js"></script>
+
+
+  </body>
+</html>

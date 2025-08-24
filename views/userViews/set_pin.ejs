@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Set PIN</title>
+    <!-- ========= links start ========= -->
+      <%- include('../snippets/links.ejs') %>
+      <link rel="stylesheet" href="/css/components.css">
+      <!-- ========= links end ========= -->
+  </head>
+  <body>
+<% var context %>
+
+   
+<div class="main-container">
+  <!-- ========= topbar starts ========= -->
+ <%- include('../snippets/topbar.ejs') %>
+  <!-- ========= topbar ends ========= -->
+
+
+
+  <!-- =============== footbar starts ================== -->
+  <%- include('../snippets/footbar.ejs') %>
+<!-- =============== footbar ends ================== -->
+
+
+  <!-- ============== this container holds everything in sidebar(navigation bar) -->
+  <%- include('../snippets/navbar.ejs') %>
+<!-- navigation bar ends -->
+
+<div class="body-content">
+
+      <div class="form-container">
+               <div class="form-subject">set pin</div>
+              <form id="form">
+    
+                <% if (context.this_user.pin) { %>
+                       <label for="">Old PIN</label>
+                       <% } %>
+                       <input type="" name="old_pin"
+                       
+                        <% if (!context.this_user.pin) { %>
+                       hidden
+                       <% } %>
+                       >
+
+                   
+
+                   <label for="">New PIN</label>
+                   <input type="number" name="new_pin">
+    
+                   <label for="">Confirm PIN</label>
+                   <input type="number" name="comfirm_pin">
+    
+    
+                   <button id="submit_btn" type="submit">Submit</button>
+              </form>
+         </div>
+   
+
+
+      </div>
+
+<div class="message" id="message" hidden>uuuu</div>
+
+
+</div>
+<script src="/js/actions.js"></script>
+<script src="/formHandlers/set_pin.js"></script>
+
+<script>
+const nf = new Intl.NumberFormat('en-NG', {
+  style: 'currency',
+  currency: 'NGN',
+  maximumFractionDigits: 2
+});
+console.log(nf.format(1500)); // "₦1,500.00"
+document.querySelector('.amoun').textContent = nf.format(1500);
+</script>
+  </body>
+</html>

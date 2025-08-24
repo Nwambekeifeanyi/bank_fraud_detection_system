@@ -1,0 +1,20 @@
+<% if (context.this_user) { %>
+     
+  <div class="personal-info">
+    <div class="detail">
+      <div class="label">Name:</div>
+      <div class="value"><%= context.this_user.full_name %></div>
+    </div>
+    <div class="detail">
+      <div class="label">Contact:</div>
+      <div class="value"><%= context.this_user.contact %></div>
+    </div>
+    <div class="detail">
+      <div class="label">Reward</div>
+      <div class="value"><%= context.this_user.reward %> points</div>
+      <div class="btns">
+        <a href="withdraw"><button>Withdraw</button></a>
+      </div>
+    </div>
+  </div>
+<% } %>

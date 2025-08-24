@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Transactions</title>
+    <!-- ========= links start ========= -->
+      <%- include('../snippets/links.ejs') %>
+      <!-- ========= links end ========= -->
+  </head>
+  <body>
+<% var context %>
+
+   
+<div class="main-container">
+  <!-- ========= topbar starts ========= -->
+ <%- include('../snippets/adminTop.ejs') %>
+  <!-- ========= topbar ends ========= -->
+
+
+
+  <!-- ============== this container holds everything in sidebar(navigation bar) -->
+  <%- include('../snippets/adminNav.ejs') %>
+<!-- navigation bar ends -->
+
+<div class="body-content">
+  <!-- <div class="page_title">Dashboard</div> -->
+
+
+
+
+      <select name="" id="transaction_type" class="sort_table" onchange="sort_table()">
+            <option value="">--------Sort--------</option>
+            <option value="deposit">Deposit</option>
+            <option value="withdrawal">Withdrawal</option>
+            <option value="transfer">Transfer</option>
+      </select>
+
+      <% if (context.transaction_type) { %>
+            <div class="table-subject"><i class="fa-solid fa-caret-right"></i><%= context.transaction_type %></div>
+            <% } else { %>
+                  
+                  <div class="table-subject"><i class="fa-solid fa-caret-right"></i> transactions</div>
+                  <% } %>
+
+
+  <% if (context.transactions.length > 0) { %>
+   
+   
+    <div class="table-container">
+   
+        <table class="table table-borderless table-sm">
+    <tr>
+            <th>S/N</th>
+            <th>account</th>
+            <th>recipient</th>
+            <th>Reg date</th>
+            <th>Type</th>
+            <th>Amount</th>
+            <th>status</th>
+            <th>ID</th>
+            <th>Receipt</th>
+    </tr>
+  
+
+     <% context.transactions.forEach((transaction, index) => { %>
+     
+      <tr>
+        <td><%= index + 1 %>.</td>
+        <td><%= transaction.user.full_name %></td>
+        <td>
+          <% if (transaction.recipient) { %>
+            <%= transaction.recipient.full_name %>
+           
+            <% } else { %>
+             Null
+          <% } %>
+        </td>
+        <td style="text-transform: none;"><%= transaction.regDate %></td>
+        <td><%= transaction.transaction_type %></td>
+        <td><%= transaction.amount %></td>
+        <td
+        <% if (transaction.status == 'successful') { %>
+         style='color: green; font-weight: bold'
+         
+         <% } else { %>
+          
+          style='color: red; font-weight: bold'
+        <% } %>
+        ><%= transaction.status %></td>
+        <td><%= transaction._id %></td>
+        <td><a href="/admin/transaction/<%= transaction._id %>"><button>View</button></a></td>
+      </tr>
+    <% }) %>
+  
+  
+  
+   
+    
+  </table>
+   </div>
+  <% } %>
+  
+<% if (!context.transactions.length > 0) { %>
+  <div class="no-output">
+            No transaction found
+       </div>
+  <% } %>
+
+
+
+
+</div>
+
+
+
+</div>
+<script src="/js/actions.js"></script>
+  </body>
+</html>

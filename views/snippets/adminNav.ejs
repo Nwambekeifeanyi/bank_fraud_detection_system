@@ -1,0 +1,104 @@
+<div class="navigation" id="navBar" >
+  <div class="username">
+
+    <% if (context.admin) { %>
+     ADMIN - <%= context.admin.first_name %> <%= context.admin.last_name %>
+     
+      <% } else { %>
+       ADMIN
+    <% } %>
+  </div>
+  <!-- ===================== sidebar menus ============================= -->
+  <ul>
+    <!-- <li>
+      <a href="/admin/#">
+        <span class="title">kelly smith</span>
+      </a>
+    </li> -->
+
+    <li>
+      <a href="/admin/dashboard">
+        <span class="icon">
+          <i class="fa-solid fa-house"></i>
+        </span>
+        <span class="title">dashboard</span>
+      </a>
+    </li>
+    <li>
+      <a href="/admin/accounts">
+        <span class="icon">
+          <i class="fa-solid fa-user-tie"></i>
+        </span>
+        <span class="title">Accounts</span>
+      </a>
+    </li>
+    <li>
+      <a href="/admin/accounts?q=true">
+        <span class="icon">
+          
+          <i class="fa-solid fa-user-slash"></i>
+        </span>
+        <span class="title">blacklisted</span>
+      </a>
+    </li>
+    <li>
+      <a href="/admin/transactions">
+        <span class="icon">
+          <i class="fa-solid fa-money-check-dollar"></i>
+        </span>
+        <span class="title">transactions</span>
+      </a>
+    </li>
+    <li>
+      <a href="/admin/notifications">
+        <span class="icon">
+          <i class="fa-solid fa-bell"></i>
+        </span>
+        <span class="title">Notifications</span>
+      </a>
+    </li>
+    <li>
+      <a href="/admin/alerts">
+        <span class="icon">
+          <i class="fa-solid fa-triangle-exclamation"></i>
+        </span>
+        <span class="title">Fraud alerts</span>
+      </a>
+    </li>
+    <li>
+      <a href="/admin/login_attempts">
+        <span class="icon">
+         <i class="fa-solid fa-arrow-right-to-bracket"></i>
+        </span>
+        <span class="title">login attempts</span>
+      </a>
+    </li>
+    <!-- <li>
+      <a href="/admin/incidents">
+        <span class="icon">
+         <i class="fa-solid fa-circle-exclamation"></i>
+        </span>
+        <span class="title">Fraud Rules</span>
+      </a>
+    </li> -->
+
+    <!-- <li>
+      <a href="/admin/tips">
+        <span class="icon">
+              <i class="fa-solid fa-graduation-cap"></i>
+        </span>
+        <span class="title">University Tips</span>
+      </a>
+    </li> -->
+
+   
+    <li>
+      <a href="/auth/admin-logout">
+        <span class="icon">
+          <i class="fa-solid fa-right-from-bracket"></i>
+        </span>
+        <span class="title">LOGOUT</span>
+      </a>
+    </li>
+  </ul>
+</div>

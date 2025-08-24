@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Accounts</title>
+    <!-- ========= links start ========= -->
+      <%- include('../snippets/links.ejs') %>
+      <!-- ========= links end ========= -->
+  </head>
+  <body>
+<% var context %>
+
+   
+<div class="main-container">
+  <!-- ========= topbar starts ========= -->
+ <%- include('../snippets/adminTop.ejs') %>
+  <!-- ========= topbar ends ========= -->
+
+
+
+  <!-- ============== this container holds everything in sidebar(navigation bar) -->
+  <%- include('../snippets/adminNav.ejs') %>
+<!-- navigation bar ends -->
+
+<div class="body-content">
+  <!-- <div class="page_title">Dashboard</div> -->
+
+  <% if (context.transaction) { %>
+   
+    <div class="receipt_container">
+          <div class="receipt">
+                <div class="logo">fraudShield</div>
+                <div class="subject">transaction receipt</div>
+    
+                <div class="receipt_details">
+                      <div class="receipt_label">transaction type:</div>
+                      <div class="receipt_value"><%= context.transaction.transaction_type %></div>
+                </div>
+                <div class="receipt_details">
+                      <div class="receipt_label">status:</div>
+                      <div class="receipt_value"><%= context.transaction.status %></div>
+                </div>
+
+                <div class="receipt_details">
+                      <div class="receipt_label">Sender:</div>
+                      <div class="receipt_value"><%= context.transaction.user.full_name %></div>
+                </div>
+
+                <% if (context.transaction.recipient) { %>
+                 
+                  <div class="receipt_details">
+                        <div class="receipt_label">Receiver:</div>
+                        <div class="receipt_value"><%= context.transaction.recipient.full_name %></div>
+                  </div>
+                <% } %>
+
+                <div class="receipt_details">
+                      <div class="receipt_label">amount:</div>
+                      <div class="receipt_value">₦ <%= context.transaction.amount %></div>
+                </div>
+                <div class="receipt_details">
+                      <div class="receipt_label">Sender</div>
+                      <div class="receipt_value"><%= context.transaction.regDate %></div>
+                </div>
+                <div class="receipt_details">
+                      <div class="receipt_label">transaction ID:</div>
+                      <div class="receipt_value"><%= context.transaction._id %></div>
+                </div>
+          </div>
+          </div>
+  <% } %>
+</div>
+
+
+     
+
+
+  
+
+
+
+
+</div>
+
+
+
+</div>
+<script src="/js/actions.js"></script>
+  </body>
+</html>

@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>User || Dashboard</title>
+    <!-- ========= links start ========= -->
+      <%- include('../snippets/links.ejs') %>
+      <link rel="stylesheet" href="/css/components.css">
+      <!-- ========= links end ========= -->
+  </head>
+  <body>
+<% var context %>
+
+   
+<div class="main-container">
+  <!-- ========= topbar starts ========= -->
+ <%- include('../snippets/topbar.ejs') %>
+  <!-- ========= topbar ends ========= -->
+
+
+
+  <!-- =============== footbar starts ================== -->
+  <%- include('../snippets/footbar.ejs') %>
+<!-- =============== footbar ends ================== -->
+
+
+  <!-- ============== this container holds everything in sidebar(navigation bar) -->
+  <%- include('../snippets/navbar.ejs') %>
+<!-- navigation bar ends -->
+
+<div class="body-content">
+
+ 
+
+<div class="form-container">
+               <div class="form-subject">set pin</div>
+              <form id="form">
+    
+                   <label for="">Account Number</label>
+                   <input type="number" name="account_number" onkeyup='verify_account()' id="account_number">
+
+                   <label for="">Account Name</label>
+                   <input type="text" name="account_name" disabled id="account_name">
+    
+                   <label for="">Amount</label>
+                   <input type="number" name="amount">
+
+                   <label for="">PIN</label>
+                   <input type="password" name="pin">
+    
+    
+                   <button id="submit_btn" type="submit">Submit</button>
+              </form>
+         </div>
+   
+
+
+      </div> 
+ 
+          
+  </div>
+
+
+
+
+
+</div>
+
+<div class="message" id="message" hidden>uuuu</div>
+
+
+
+
+</div>
+<script src="/js/actions.js"></script>
+<script src="/formHandlers/transfer.js"></script>
+
+
+  </body>
+</html>

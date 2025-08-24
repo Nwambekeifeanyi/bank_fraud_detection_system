@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>User || Dashboard</title>
+    <!-- ========= links start ========= -->
+      <%- include('../snippets/links.ejs') %>
+      <link rel="stylesheet" href="/css/components.css">
+      <!-- ========= links end ========= -->
+  </head>
+  <body>
+<% var context %>
+
+   
+<div class="main-container">
+  <!-- ========= topbar starts ========= -->
+ <%- include('../snippets/topbar.ejs') %>
+  <!-- ========= topbar ends ========= -->
+
+
+
+  <!-- =============== footbar starts ================== -->
+  <%- include('../snippets/footbar.ejs') %>
+<!-- =============== footbar ends ================== -->
+
+
+  <!-- ============== this container holds everything in sidebar(navigation bar) -->
+  <%- include('../snippets/navbar.ejs') %>
+<!-- navigation bar ends -->
+
+<div class="body-content">
+
+  <% if (context.this_user) { %>
+    <div class="record_container">
+      <div class="record">
+        <div class="name">Balance</div>
+        <div class="amount">₦ <%= context.this_user.balance %></div>
+        <div class="btns">
+          <a href="/account/transfer"><button>Transfer</button></a>
+        </div>
+      </div>
+      <div class="record">
+        <div class="name">in flow</div>
+        <div class="amount">₦ <%= context.this_user.in_flow %></div>
+        <div class="btns">
+          <a href="/account/transactions"><button>View</button></a>
+        </div>
+      </div>
+      <div class="record">
+        <div class="name">out flow</div>
+        <div class="amount">₦ <%= context.this_user.out_flow %></div>
+        <div class="btns">
+          <a href="/account/transactions"><button>View</button></a>
+        </div>
+      </div>
+    </div>
+   
+  <% } %>
+
+
+<div class="table-subject user_dashboard_table_subject"><i class="fa-solid fa-caret-right"></i> Recent Transactions</div>
+  <div class="table-container table-container-sm">
+<% if (context.transactions) { %>
+<% if (context.transactions.length > 0) { %>
+   
+   
+    <div class="table-container">
+   
+        <table class="table table-borderless table-sm">
+          <tr>
+            <th>S/N</th>
+            <th>account</th>
+            <th>recipient</th>
+            <th>Reg date</th>
+            <th>Type</th>
+            <th>Amount</th>
+            <th>status</th>
+            <th>ID</th>
+            <th>Receipt</th>
+          </tr>
+  
+
+          <% context.transactions.forEach((transaction, index) => { %>
+          
+            <tr>
+              <td><%= index + 1 %>.</td>
+              <td><%= transaction.user.full_name %></td>
+              <td>
+                <% if (transaction.recipient) { %>
+                  <%= transaction.recipient.full_name %>
+                
+                  <% } else { %>
+                  Null
+                <% } %>
+              </td>
+              <td style="text-transform: none;"><%= transaction.regDate %></td>
+              <td><%= transaction.transaction_type %></td>
+              <td><%= transaction.amount %></td>
+              <td
+              <% if (transaction.status == 'successful') { %>
+              style='color: green; font-weight: bold'
+              
+              <% } else { %>
+                
+                style='color: red; font-weight: bold'
+              <% } %>
+              ><%= transaction.status %></td>
+              <td><%= transaction._id %></td>
+              <td><a href="/account/transaction/<%= transaction._id %>"><button>View</button></a></td>
+            </tr>
+          <% }) %>
+        
+        
+        
+        
+          
+        </table>
+   </div>
+  <% } %>
+  <% } %>
+
+
+
+ 
+ 
+          
+  </div>
+
+
+
+
+
+</div>
+
+
+
+</div>
+<script src="/js/actions.js"></script>
+
+<script>
+const nf = new Intl.NumberFormat('en-NG', {
+  style: 'currency',
+  currency: 'NGN',
+  maximumFractionDigits: 2
+});
+console.log(nf.format(1500)); // "₦1,500.00"
+document.querySelector('.amoun').textContent = nf.format(1500);
+</script>
+  </body>
+</html>

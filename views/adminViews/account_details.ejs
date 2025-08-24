@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Accounts</title>
+    <!-- ========= links start ========= -->
+      <%- include('../snippets/links.ejs') %>
+      <!-- ========= links end ========= -->
+  </head>
+  <body>
+<% var context %>
+
+   
+<div class="main-container">
+  <!-- ========= topbar starts ========= -->
+ <%- include('../snippets/adminTop.ejs') %>
+  <!-- ========= topbar ends ========= -->
+
+
+
+  <!-- ============== this container holds everything in sidebar(navigation bar) -->
+  <%- include('../snippets/adminNav.ejs') %>
+<!-- navigation bar ends -->
+
+<div class="body-content">
+  <!-- <div class="page_title">Dashboard</div> -->
+
+
+  <% if (context.this_user) { %>
+   
+      <div class="user_detail_container">
+          <div class="user_detail">
+                <div class="image">
+                      <img src="/images/<%= context.this_user.profile %>" alt="profile image">
+                </div>
+    
+                <div class="detail_text">
+                      <div class="detail">
+                            <div class="label">Name:</div>
+                            <div class="value"><%= context.this_user.full_name %></div>
+                      </div>
+                      <div class="detail">
+                            <div class="label">Account:</div>
+                            <div class="value"><%= context.this_user.account_number %></div>
+                      </div>
+                      <div class="detail">
+                            <div class="label">email:</div>
+                            <div class="value" style="text-transform: lowercase;"><%= context.this_user.email %></div>
+                      </div>
+                      <div class="detail">
+                            <div class="label">Contact:</div>
+                            <div class="value"><%= context.this_user.contact %></div>
+                      </div>
+                      <div class="detail">
+                            <div class="label">gender:</div>
+                            <div class="value"><%= context.this_user.gender %></div>
+                      </div>
+                      <div class="detail">
+                            <div class="label">balance:</div>
+                            <div class="value">₦ <%= context.this_user.balance %></div>
+                      </div>
+                      <div class="detail">
+                            <div class="label">In flow:</div>
+                            <div class="value">₦ <%= context.this_user.in_flow %></div>
+                      </div>
+                      <div class="detail">
+                            <div class="label">out flow:</div>
+                            <div class="value">₦ <%= context.this_user.out_flow %></div>
+                      </div>
+                      <div class="detail">
+                            <div class="label">Reg date:</div>
+                            <div class="value"><%= context.this_user.regDate %></div>
+                      </div>
+                      <div class="detail">
+                            <div class="label">status:</div>
+
+                            <% if (context.this_user.is_blocked) { %>
+                              <div class="value">Blocked</div>
+                              
+                              <% } else { %>
+                              <div class="value">Active</div>
+                               
+                            <% } %>
+                            <% if (context.this_user.is_black_listed) { %>
+                              <div class="value">& blacklisted</div>
+                              
+                              <% } else { %>
+                              <div class="value"> & whitelisted</div>
+                               
+                            <% } %>
+                      </div>
+                </div>
+
+                <div class="control_btns">
+
+                  <div class="btns">
+
+                        <a href="/admin/update_account/<%= context.this_user._id %>">
+      
+                              <button>update</button>
+                        </a>
+                  </div>
+
+                   <div class="btns">
+
+       
+                               <button style="background: rgb(228, 98, 12);" onclick="alter_components('<%= context.this_user._id %>','user','block')">
+
+                                     <% if (context.this_user.is_blocked) { %>
+                              
+                                          unblock
+                              <% } else { %>
+                               
+                                    block
+                            <% } %>
+                              
+                              </button>
+                   </div>
+
+                   <div class="btns">
+
+       
+                               <button style="background: rgb(0, 0, 0);" onclick="alter_components('<%= context.this_user._id %>','user','blacklist')">
+                                     
+                                     <% if (context.this_user.is_black_listed) { %>
+                                          
+                                          whitelisted
+                              <% } else { %>
+                               
+                                    blacklist
+                            <% } %>
+                              </button>
+                   </div>
+
+                   <div class="btns">
+
+       
+                               <button style="background: rgb(199, 0, 0);" onclick="alter_components('<%= context.this_user._id %>','user','delete')">Delete</button>
+                   </div>
+                </div>
+          </div>
+      </div>
+
+
+      <div class="table-subject"><i class="fa-solid fa-caret-right"></i> transactions</div>
+
+      <% if (context.transactions.length > 0) { %>
+   
+   
+
+    <div class="table-container">
+   
+        <table class="table table-borderless table-sm">
+    <tr>
+            <th>S/N</th>
+            <th>account</th>
+            <th>recipient</th>
+            <th>Reg date</th>
+            <th>Type</th>
+            <th>Amount</th>
+            <th>status</th>
+            <th>ID</th>
+            <th>Receipt</th>
+    </tr>
+  
+
+     <% context.transactions.forEach((transaction, index) => { %>
+     
+      <tr>
+        <td><%= index + 1 %>.</td>
+        <td><%= transaction.user.full_name %></td>
+        <td>
+           <% if (transaction.recipient) { %>
+            <%= transaction.recipient.full_name %>
+           
+            <% } else { %>
+             Null
+          <% } %>
+      </td>
+        <td style="text-transform: none;"><%= transaction.regDate %></td>
+
+        <td><%= transaction.transaction_type %></td>
+        <td><%= transaction.amount %></td>
+       <td
+        <% if (transaction.status == 'successful') { %>
+         style='color: green; font-weight: bold'
+         
+         <% } else { %>
+          
+          style='color: red; font-weight: bold'
+        <% } %>
+        ><%= transaction.status %></td>
+        <td><%= transaction._id %></td>
+        <td><a href="/admin/transaction/<%= transaction._id %>"><button>View</button></a></td>
+      </tr>
+    <% }) %>
+  
+  
+  
+   
+    
+  </table>
+   </div>
+  <% } %>
+  <% } %>
+
+
+    <% if (context.notifications.length > 0) { %>
+      <div class="notification_container">
+            <div class="table-subject notification_subject"><i class="fa-solid fa-caret-right"></i> Notifications</div>
+      <% context.notifications.forEach(notification => { %>
+
+
+                    <% if (notification.user) { %>
+
+
+                    <% if (notification.user == context.this_user._id) { %>
+
+                      <% if (notification.sender_message) { %>
+
+                         <div class="notification">
+                      <span><%= notification.sender_message %></span>
+                        <p><%= notification.regDate %></p>
+                         </div>
+
+                       <% } %>
+
+                        <% } %>
+                      <% } %>
+
+
+                    <% if (notification.recipient) { %>
+                    <% if (notification.recipient == context.this_user._id) { %>
+
+                      <% if (notification.recipient_message) { %>
+
+                        <div class="notification">
+                      <span><%= notification.recipient_message %></span>
+                        <p><%= notification.regDate %></p>
+                        </div>
+                       
+                       <% } %>
+
+                        <% } %>
+                      <% } %>
+
+
+
+                      <% if (notification.message) { %>
+                       
+                        <div class="notification">
+                            <span><%= notification.message %></span>
+                              <p><%= notification.regDate %></p>
+                             
+                        </div>
+                      <% } %>
+                  
+                  <% }) %>
+            </div>
+  <% } %>
+
+
+  <% if (context.alerts.length > 0) { %>
+      <div class="notification_container">
+            <div class="table-subject notification_subject"><i class="fa-solid fa-caret-right"></i> Alerts</div>
+      <% context.alerts.forEach(alert => { %>
+
+
+
+
+                       
+
+
+        
+                        <% if (alert.message) { %>
+                         
+                          <div class="notification">
+                                <span><%= alert.message %></span>
+                                <p><%= alert.regDate %></p>
+                                <div class="account">
+                                      <a href="/admin/account/<%= alert.user._id %>"><%= alert.user.full_name %></a>
+                                </div>
+                          </div>
+                        <% } %>
+                  
+                  <% }) %>
+            </div>
+  <% } %>
+
+    <% if (context.login_attempts.length > 0) { %>
+      <div class="notification_container">
+            <div class="table-subject notification_subject"><i class="fa-solid fa-caret-right"></i> Login attempts</div>
+      <% context.login_attempts.forEach(login_attempt => { %>
+                  <div class="notification">
+                        <span><%= login_attempt.message %></span>
+                        <p><%= login_attempt.regDate %></p>
+                       
+                  </div>
+                  
+                  <% }) %>
+            </div>
+  <% } %>
+
+  
+
+
+
+
+
+<div class="message" id="message" hidden>uuuu</div>
+
+
+</div>
+<script src="/js/actions.js"></script>
+  </body>
+</html>

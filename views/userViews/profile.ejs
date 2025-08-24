@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Profile</title>
+    <!-- ========= links start ========= -->
+      <%- include('../snippets/links.ejs') %>
+      <link rel="stylesheet" href="/css/components.css">
+      <!-- ========= links end ========= -->
+  </head>
+  <body>
+<% var context %>
+
+   
+<div class="main-container">
+  <!-- ========= topbar starts ========= -->
+ <%- include('../snippets/topbar.ejs') %>
+  <!-- ========= topbar ends ========= -->
+
+
+
+  <!-- =============== footbar starts ================== -->
+  <%- include('../snippets/footbar.ejs') %>
+<!-- =============== footbar ends ================== -->
+
+
+  <!-- ============== this container holds everything in sidebar(navigation bar) -->
+  <%- include('../snippets/navbar.ejs') %>
+<!-- navigation bar ends -->
+
+<div class="body-content">
+
+ 
+ <% if (context.this_user) { %>
+   
+      <div class="user_detail_container">
+          <div class="user_detail">
+                <div class="image">
+                      <img src="/images/<%= context.this_user.profile %>" alt="profile image">
+                </div>
+    
+                <div class="detail_text">
+                      <div class="detail">
+                            <div class="label">Name:</div>
+                            <div class="value"><%= context.this_user.full_name %></div>
+                      </div>
+                      <div class="detail">
+                            <div class="label">Account:</div>
+                            <div class="value"><%= context.this_user.account_number %></div>
+                      </div>
+                      <div class="detail">
+                            <div class="label">email:</div>
+                            <div class="value" style="text-transform: lowercase;"><%= context.this_user.email %></div>
+                      </div>
+                      <div class="detail">
+                            <div class="label">Contact:</div>
+                            <div class="value"><%= context.this_user.contact %></div>
+                      </div>
+                      <div class="detail">
+                            <div class="label">gender:</div>
+                            <div class="value"><%= context.this_user.gender %></div>
+                      </div>
+                      <div class="detail">
+                            <div class="label">balance:</div>
+                            <div class="value">₦ <%= context.this_user.balance %></div>
+                      </div>
+                      <div class="detail">
+                            <div class="label">In flow:</div>
+                            <div class="value">₦ <%= context.this_user.in_flow %></div>
+                      </div>
+                      <div class="detail">
+                            <div class="label">out flow:</div>
+                            <div class="value">₦ <%= context.this_user.out_flow %></div>
+                      </div>
+                      <div class="detail">
+                            <div class="label">Reg date:</div>
+                            <div class="value"><%= context.this_user.regDate %></div>
+                      </div>
+                      <div class="detail">
+                            <div class="label">status:</div>
+
+                            <% if (context.this_user.is_blocked) { %>
+                              <div class="value">Blocked</div>
+                              
+                              <% } else { %>
+                              <div class="value">Active</div>
+                               
+                            <% } %>
+                            <% if (context.this_user.is_black_listed) { %>
+                              <div class="value">& blacklisted</div>
+                              
+                              <% } else { %>
+                              <div class="value"> & whitelisted</div>
+                               
+                            <% } %>
+                      </div>
+                </div>
+
+                <div class="control_btns">
+
+                  <% if (!context.this_user.pin) { %>
+                        <div class="btns">
+      
+                              <a href="/account/set_pin">
+            
+                                    <button>set PIN</button>
+                              </a>
+                        </div>
+                        
+                        <% } else { %>
+                              <div class="btns">
+            
+                                    <a href="/account/set_pin">
+                  
+                                          <button>Change PIN</button>
+                                    </a>
+                              </div>
+                         
+                  <% } %>
+
+                   <!-- <div class="btns">
+
+       
+                               <button style="background: rgb(228, 98, 12);" onclick="alter_components('<%= context.this_user._id %>','user','block')">
+
+                                     <% if (context.this_user.is_blocked) { %>
+                              
+                                          unblock
+                              <% } else { %>
+                               
+                                    block
+                            <% } %>
+                              
+                              </button>
+                   </div> -->
+<!-- 
+                   <div class="btns">
+
+       
+                               <button style="background: rgb(0, 0, 0);" onclick="alter_components('<%= context.this_user._id %>','user','blacklist')">
+                                     
+                                     <% if (context.this_user.is_black_listed) { %>
+                                          
+                                          whitelisted
+                              <% } else { %>
+                               
+                                    blacklist
+                            <% } %>
+                              </button>
+                   </div>
+
+                   <div class="btns">
+
+       
+                               <button style="background: rgb(199, 0, 0);" onclick="alter_components('<%= context.this_user._id %>','user','delete')">Delete</button>
+                   </div> -->
+                </div>
+          </div>
+      </div>
+  <% } %>
+
+
+          
+  </div>
+
+
+
+
+
+</div>
+
+
+
+</div>
+<script src="/js/actions.js"></script>
+
+<script>
+const nf = new Intl.NumberFormat('en-NG', {
+  style: 'currency',
+  currency: 'NGN',
+  maximumFractionDigits: 2
+});
+console.log(nf.format(1500)); // "₦1,500.00"
+document.querySelector('.amoun').textContent = nf.format(1500);
+</script>
+  </body>
+</html>

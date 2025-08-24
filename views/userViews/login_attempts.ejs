@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>User || Dashboard</title>
+    <!-- ========= links start ========= -->
+      <%- include('../snippets/links.ejs') %>
+      <link rel="stylesheet" href="/css/components.css">
+      <!-- ========= links end ========= -->
+  </head>
+  <body>
+<% var context %>
+
+   
+<div class="main-container">
+  <!-- ========= topbar starts ========= -->
+ <%- include('../snippets/topbar.ejs') %>
+  <!-- ========= topbar ends ========= -->
+
+
+
+  <!-- =============== footbar starts ================== -->
+  <%- include('../snippets/footbar.ejs') %>
+<!-- =============== footbar ends ================== -->
+
+
+  <!-- ============== this container holds everything in sidebar(navigation bar) -->
+  <%- include('../snippets/navbar.ejs') %>
+<!-- navigation bar ends -->
+
+<div class="body-content">
+
+
+
+
+
+ <% if (context.login_attempts.length > 0) { %>
+      <div class="notification_container">
+            <div class="table-subject notification_subject"><i class="fa-solid fa-caret-right"></i> Login attempts</div>
+      <% context.login_attempts.forEach(login_attempt => { %>
+                  <div class="notification">
+                        <span><%= login_attempt.message %></span>
+                        <p><%= login_attempt.regDate %></p>
+                       
+                  </div>
+                  
+                  <% }) %>
+            </div>
+  <% } %>
+
+
+ 
+ 
+          
+  </div>
+
+
+
+
+
+</div>
+
+
+<% if (!context.login_attempts.length > 0) { %>
+  <div class="no-output">
+            No login attempt found
+       </div>
+  <% } %>
+
+</div>
+<script src="/js/actions.js"></script>
+
+<script>
+const nf = new Intl.NumberFormat('en-NG', {
+  style: 'currency',
+  currency: 'NGN',
+  maximumFractionDigits: 2
+});
+console.log(nf.format(1500)); // "₦1,500.00"
+document.querySelector('.amoun').textContent = nf.format(1500);
+</script>
+  </body>
+</html>

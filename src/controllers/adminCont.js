@@ -11,7 +11,7 @@ import { regDate, time } from "../middlewares/date.js";
 
 const adminCont = {
   getLogin: async (req, res) => {
-    console.log(regDate);
+    // console.log(regDate);
 
     return res.render("./adminViews/login");
   },
@@ -192,7 +192,7 @@ const adminCont = {
 
     // await User.updateMany({is_deleted: false})
     let q = req.query.q
-    console.log(q);
+    // console.log(q);
     
     let users, page
 
@@ -287,7 +287,7 @@ const adminCont = {
       let num = String(random).slice(0, 10);
       const account_number = num;
 
-      console.log(account_number);
+      // console.log(account_number);
 
       const createdAccount = await User.create({
         full_name,
@@ -300,7 +300,7 @@ const adminCont = {
       });
 
       // 		+
-      console.log(req.body);
+      // console.log(req.body);
 
       return res
         .status(200)
@@ -413,7 +413,7 @@ const adminCont = {
     try {
       const { id, component, action } = req.body;
 
-      console.log(req.body);
+      // console.log(req.body);
 
       let message;
       let deleted
@@ -518,7 +518,7 @@ const adminCont = {
         transaction_type = 'transactions'
     }
 
-    console.log(transactions);
+    // console.log(transactions);
     
 
     const context = {
@@ -542,7 +542,7 @@ const adminCont = {
     const {id} = req.params
 
     const transaction = await Transaction.findById(id).populate('user').populate('recipient')
-    console.log(transaction);
+    // console.log(transaction);
     
     const context = {
       page: 'Receipt',

@@ -125,7 +125,7 @@ export default {
 
       const thisUser = await User.findOne({ email: email });
 
-
+      if (!thisUser) throw new Error("This account does not exist")
       
       
 

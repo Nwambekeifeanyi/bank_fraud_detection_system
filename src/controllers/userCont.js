@@ -217,6 +217,9 @@ getTransfer: async (req, res) => {
       const user_id = req.user;
       const this_user = await User.findOne({ _id: user_id });
 
+      console.log(this_user.balance);
+      console.log(amount);
+      
 
       // recipient
       const account = await User.findOne({account_number: account_number})
@@ -281,7 +284,7 @@ getTransfer: async (req, res) => {
       }  
       
       
-      if (this_user.balance < amount) {
+      if (parseInt(this_user.balance) < parseInt(amount)) {
            const transaction = await Transaction.create({
               user: user_id,
               amount,
